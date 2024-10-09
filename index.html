@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1>Medical Prediction System</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h2>Predict Diabetes Quickly and Easily</h2>
+            <p>Fill in your health information and let our advanced system predict if you are at risk of diabetes.</p>
+            <a href="#form-section" class="btn">Get Started</a>
+        </div>
+    </section>
+
+    <section id="form-section" class="form-container">
+        <div class="form-box">
+            <h3>Enter Your Health Details</h3>
+            <form action="/predict" method="POST">
+                <!-- Gender Input -->
+                <label for="gender">Gender:</label>
+                <select name="gender" id="gender" required>
+                    <option value="0">Female</option>
+                    <option value="1">Male</option>
+                    <option value="2">Other</option>
+                </select>
+
+                <!-- Smoking History -->
+                <label for="smoking_history">Smoking History:</label>
+                <select name="smoking_history" id="smoking_history" required>
+                    <option value=0>Never</option>
+                    <option value=1>No Info</option>
+                    <option value=2>Current</option>
+                    <option value=3>Former</option>
+                    <option value=4>Ever</option>
+                    <option value=5>Not Current</option>
+                </select>
+
+                <!-- Age Input -->
+                <label for="age">Age:</label>
+                <input type="number" name="age" id="age" required>
+
+                <!-- BMI Input -->
+                <label for="bmi">BMI:</label>
+                <input type="number" step="0.1" name="bmi" id="bmi" required>
+
+                <!-- Blood Glucose Level -->
+                <label for="blood_glucose_level">Blood Glucose Level:</label>
+                <input type="number" name="blood_glucose_level" id="blood_glucose_level" required>
+
+                <!-- HbA1c Level -->
+                <label for="HbA1c_level">HbA1c Level:</label>
+                <input type="number" step="0.1" name="HbA1c_level" id="HbA1c_level" required>
+
+                <!-- Hypertension Input (Yes/No) -->
+                <label for="hypertension">Hypertension:</label>
+                <select name="hypertension" id="hypertension" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <!-- Heart Disease Input (Yes/No) -->
+                <label for="heart_disease">Heart Disease:</label>
+                <select name="heart_disease" id="heart_disease" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <button type="submit">Predict</button>
+            </form>
+
+            {% if prediction_text %}
+                <div class="result-box">
+                    <h2>{{ prediction_text }}</h2>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+</body>
+</html>
